@@ -23,12 +23,15 @@ cmake .. \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DMPIEXEC_PREFLAGS="--oversubscribe;--bind-to;none;-mca;plm;isolated" \
     -DMPIEXEC_MAX_NUMPROCS=2  \
-    -DTESTCODE_NPROCS=2
+    -DTESTCODE_NPROCS=2 \
+    -DQE_ENABLE_FOX=ON \
+    -DQE_ENABLE_PLUGINS="gipaw"
 
 # Libxc fortran bindings currently not available for macos
     #-DQE_ENABLE_LIBXC=ON \
  
-make
+make -j20
+
 
 #if [[ "$mpi" == "openmpi" ]]; then
 export OMPI_MCA_plm_rsh_agent=sh
